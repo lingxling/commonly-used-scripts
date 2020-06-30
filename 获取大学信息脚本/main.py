@@ -9,6 +9,7 @@
 import requests
 import json
 import csv
+import os
 
 
 # 构建请求头
@@ -89,7 +90,7 @@ def get_latlng(address):
     """
     返回经纬度信息
     """
-    ak = 'VNfGC2LBq6uYTO6sDKqQoA1WfiZiIFiv'
+    ak = '百度地图ak'
     url = 'http://api.map.baidu.com/geocoding/v3/?address={inputAddress}&output=json&ak={myAk}'.format(inputAddress=address,myAk=ak)
     res = requests.get(url)
     json_data = json.loads(res.text)
@@ -121,6 +122,8 @@ def save_file():
 
 
 def main():
+    if not os.path.exists('images'):
+        os.mkdir('images')
     get_index()
     save_file()
 
